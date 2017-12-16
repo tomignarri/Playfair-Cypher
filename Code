@@ -1,0 +1,262 @@
+matrix = []
+array = "PLAYFAIREXAMPLEABCDEFGHIKLMNOPQRSTUVWXYZ"
+fullMatrix = []
+keyword = input("Enter a keyword: ")
+row = []
+encodedRowPos = []
+column = []
+encodedColumnPos = []
+decodedRowPos = []
+decodedColumnPos = []
+encodedText = ""
+
+
+
+def createMatrix():
+  for e in array:
+    if e not in matrix:
+     matrix.append(e)
+
+def createMatrixFull():
+  x = 0
+  y = 5
+  while y < 26:
+    fullMatrix.append(matrix[x:y])
+    x = x + 5
+    y = y + 5    
+  print(fullMatrix)
+
+def readKeyword():
+  if len(keyword) == 4:  
+    a = str(keyword)
+    print(a)
+    for i in a:
+      if i in fullMatrix[0]:
+        row.append(0)
+        if i == fullMatrix[0][0]:
+          column.append(0)
+        if i == fullMatrix[0][1]:
+          column.append(1)
+        if i == fullMatrix[0][2]:
+          column.append(2)
+        if i == fullMatrix[0][3]:
+          column.append(3)
+        if i == fullMatrix[0][4]:
+          column.append(4)
+      if i in fullMatrix[1]:
+        row.append(1)
+        if i == fullMatrix[1][0]:
+          column.append(0)
+        if i == fullMatrix[1][1]:
+          column.append(1)
+        if i == fullMatrix[1][2]:
+          column.append(2)
+        if i == fullMatrix[1][3]:
+          column.append(3)
+        if i == fullMatrix[1][4]:
+          column.append(4)
+      if i in fullMatrix[2]:
+        row.append(2)
+        if i == fullMatrix[2][0]:
+          column.append(0)
+        if i == fullMatrix[2][1]:
+          column.append(1)
+        if i == fullMatrix[2][2]:
+          column.append(2)
+        if i == fullMatrix[2][3]:
+          column.append(3)
+        if i == fullMatrix[2][4]:
+          column.append(4)
+      if i in fullMatrix[3]:
+        row.append(3)
+        if i == fullMatrix[3][0]:
+          column.append(0)
+        if i == fullMatrix[3][1]:
+          column.append(1)
+        if i == fullMatrix[3][2]:
+          column.append(2)
+        if i == fullMatrix[3][3]:
+          column.append(3)
+        if i == fullMatrix[3][4]:
+          column.append(4)
+      if i in fullMatrix[4]:
+        row.append(4)
+        if i == fullMatrix[4][0]:
+          column.append(0)
+        if i == fullMatrix[4][1]:
+          column.append(1)
+        if i == fullMatrix[4][2]:
+          column.append(2)
+        if i == fullMatrix[4][3]:
+          column.append(3)
+        if i == fullMatrix[4][4]:
+          column.append(4)
+    print(row)
+    print(column)
+  else:
+    print("keyword must be 4 characters!!")
+
+def encodePair1():
+  if row[0] != row[1]:
+    columnDifference = abs(column[0] - column[1])
+    if column[0] < column[1]:
+      newColumnPos1 = columnDifference + column[0]
+      newColumnPos2 = column[1] - columnDifference
+      encodedColumnPos.append(newColumnPos1)
+      encodedColumnPos.append(newColumnPos2)
+      encodedRowPos.append(row[0])
+      encodedRowPos.append(row[1])
+    elif column[0] > column[1]:
+      newColumnPos1 = column[0] - columnDifference
+      newColumnPos2 = columnDifference + column[1]
+      encodedColumnPos.append(newColumnPos1)
+      encodedColumnPos.append(newColumnPos2)
+      encodedRowPos.append(row[0])
+      encodedRowPos.append(row[1])
+    elif column[0] == column[1]:
+      newRowPos1 = row[0] + 1
+      newRowPos2 = row[1] + 1
+      if newRowPos2 > 4:
+        newRowPos2 = 0
+      encodedRowPos.append(newRowPos1)
+      encodedRowPos.append(newRowPos2)
+      encodedColumnPos.append(column[0])
+      encodedColumnPos.append(column[1])
+  if row[0] == row[1]:
+    newColumnPos1 = column[0] + 1
+    newColumnPos2 = column[1] + 1
+    if newColumnPos2 > 4:
+        newColumnPos2 = 0
+    encodedColumnPos.append(newColumnPos1)
+    encodedColumnPos.append(newColumnPos2)
+    encodedRowPos.append(row[0])
+    encodedRowPos.append(row[1])
+
+def encodePair2():
+  if row[2] != row[3]:
+    columnDifference = abs(column[2] - column[3])
+    if column[2] < column[3]:
+      newColumnPos3 = columnDifference + column[2]
+      newColumnPos4 = column[3] - columnDifference
+      encodedColumnPos.append(newColumnPos3)
+      encodedColumnPos.append(newColumnPos4)
+      encodedRowPos.append(row[2])
+      encodedRowPos.append(row[3])
+    elif column[2] > column[3]:
+      newColumnPos3 = column[2] - columnDifference
+      newColumnPos4 = columnDifference + column[3]
+      encodedColumnPos.append(newColumnPos3)
+      encodedColumnPos.append(newColumnPos4)
+      encodedRowPos.append(row[2])
+      encodedRowPos.append(row[3])
+    elif column[2] == column[3]:
+      newRowPos3 = row[2] + 1
+      newRowPos4 = row[3] + 1
+      if newRowPos4 > 4:
+        newRowPos4 = 0
+      encodedRowPos.append(newRowPos3)
+      encodedRowPos.append(newRowPos4)
+      encodedColumnPos.append(column[2])
+      encodedColumnPos.append(column[3])    
+  if row[2] == row[3]:
+    newColumnPos3 = column[2] + 1
+    newColumnPos4 = column[3] + 1
+    if newColumnPos4 > 4:
+        newColumnPos4 = 0
+    encodedColumnPos.append(newColumnPos3)
+    encodedColumnPos.append(newColumnPos4)
+    encodedRowPos.append(row[2])
+    encodedRowPos.append(row[3])
+
+def writeEncoded():
+  encodedText = ""
+  for y, x in zip(encodedRowPos, encodedColumnPos):
+    encodedText = encodedText + fullMatrix[y][x]
+  print("Here is your code!", encodedText)
+
+  file = open("encodedText.txt","w")
+  file.write(encodedText)
+  file.write(" This is the file text!")
+  file.close()
+  file = open("encodedText.txt","r")
+  print(file.read())
+    
+
+def decodePair1():
+  if encodedRowPos[0] != encodedRowPos[1]:
+    columnDifference = abs(column[0] - column[1])
+    if column[0] < column[1]:
+      newColumnPos1 = columnDifference - encodedColumnPos[0]
+      newColumnPos2 = encodedColumnPos[1] + columnDifference
+      decodedColumnPos.append(newColumnPos1)
+      decodedColumnPos.append(newColumnPos2)
+      decodedRowPos.append(row[0])
+      decodedRowPos.append(row[1])
+    elif column[0] > column[1]:
+      newColumnPos1 = encodedColumnPos[0] + columnDifference
+      newColumnPos2 = columnDifference - encodedColumnPos[1]
+      decodedColumnPos.append(newColumnPos1)
+      decodedColumnPos.append(newColumnPos2)
+      decodedRowPos.append(row[0])
+      decodedRowPos.append(row[1])
+    elif column[0] == column[1]:
+      newRowPos1 = row[0] - 1
+      newRowPos2 = row[1] - 1
+      if newRowPos2 > 4:
+        newRowPos2 = 0
+      decodedRowPos.append(newRowPos1)
+      decodedRowPos.append(newRowPos2)
+      decodedColumnPos.append(column[0])
+      decodedColumnPos.append(column[1])
+  if row[0] == row[1]:
+    newColumnPos1 = column[0] - 1
+    newColumnPos2 = column[1] - 1
+    encodedColumnPos.append(newColumnPos1)
+    encodedColumnPos.append(newColumnPos2)
+    encodedRowPos.append(row[0])
+    encodedRowPos.append(row[1])
+
+      
+
+def decodePair2():      
+  if encodedRowPos[2] != encodedRowPos[3]:
+    columnDifference = abs(column[2] - column[3])
+    if column[2] < column[3]:
+      newColumnPos3 = columnDifference - encodedColumnPos[2]
+      newColumnPos4 = encodedColumnPos[3] + columnDifference
+      decodedColumnPos.append(newColumnPos3)
+      decodedColumnPos.append(newColumnPos4)
+      decodedRowPos.append(row[2])
+      decodedRowPos.append(row[3])
+    elif column[2] > column[3]:
+      newColumnPos3 = encodedColumnPos[2] + columnDifference
+      newColumnPos4 = columnDifference - encodedColumnPos[3]
+      decodedColumnPos.append(newColumnPos3)
+      decodedColumnPos.append(newColumnPos4)
+      decodedRowPos.append(row[2])
+      decodedRowPos.append(row[3])
+
+
+      
+
+
+
+
+
+
+createMatrix()
+createMatrixFull()
+readKeyword()
+encodePair1()
+encodePair2()
+print("encoded", encodedColumnPos)
+print("encoded", encodedRowPos)
+writeEncoded()
+decodePair1()
+decodePair2()
+print("decoded", decodedColumnPos)
+print("decoded", decodedRowPos)
+
+
+
+
