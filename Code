@@ -11,10 +11,6 @@ decodedColumnPos = []
 encodedText = ""
 
 
-# TO DO
-# REMOVE GLOBAL VARIABLES
-# REMOVE DECODING SECTIONS
-
 
 def createMatrix():
   for e in array:
@@ -186,64 +182,7 @@ def writeEncoded():
   print(file.read())
     
 
-def decodePair1():
-  if encodedRowPos[0] != encodedRowPos[1]:
-    columnDifference = abs(column[0] - column[1])
-    if column[0] < column[1]:
-      newColumnPos1 = columnDifference - encodedColumnPos[0]
-      newColumnPos2 = encodedColumnPos[1] + columnDifference
-      decodedColumnPos.append(newColumnPos1)
-      decodedColumnPos.append(newColumnPos2)
-      decodedRowPos.append(row[0])
-      decodedRowPos.append(row[1])
-    elif column[0] > column[1]:
-      newColumnPos1 = encodedColumnPos[0] + columnDifference
-      newColumnPos2 = columnDifference - encodedColumnPos[1]
-      decodedColumnPos.append(newColumnPos1)
-      decodedColumnPos.append(newColumnPos2)
-      decodedRowPos.append(row[0])
-      decodedRowPos.append(row[1])
-    elif column[0] == column[1]:
-      newRowPos1 = row[0] - 1
-      newRowPos2 = row[1] - 1
-      if newRowPos2 > 4:
-        newRowPos2 = 0
-      decodedRowPos.append(newRowPos1)
-      decodedRowPos.append(newRowPos2)
-      decodedColumnPos.append(column[0])
-      decodedColumnPos.append(column[1])
-  if row[0] == row[1]:
-    newColumnPos1 = column[0] - 1
-    newColumnPos2 = column[1] - 1
-    encodedColumnPos.append(newColumnPos1)
-    encodedColumnPos.append(newColumnPos2)
-    encodedRowPos.append(row[0])
-    encodedRowPos.append(row[1])
-
       
-
-def decodePair2():      
-  if encodedRowPos[2] != encodedRowPos[3]:
-    columnDifference = abs(column[2] - column[3])
-    if column[2] < column[3]:
-      newColumnPos3 = columnDifference - encodedColumnPos[2]
-      newColumnPos4 = encodedColumnPos[3] + columnDifference
-      decodedColumnPos.append(newColumnPos3)
-      decodedColumnPos.append(newColumnPos4)
-      decodedRowPos.append(row[2])
-      decodedRowPos.append(row[3])
-    elif column[2] > column[3]:
-      newColumnPos3 = encodedColumnPos[2] + columnDifference
-      newColumnPos4 = columnDifference - encodedColumnPos[3]
-      decodedColumnPos.append(newColumnPos3)
-      decodedColumnPos.append(newColumnPos4)
-      decodedRowPos.append(row[2])
-      decodedRowPos.append(row[3])
-
-
-      
-
-
 
 
 
@@ -256,10 +195,8 @@ encodePair2()
 print("encoded", encodedColumnPos)
 print("encoded", encodedRowPos)
 writeEncoded()
-decodePair1()
-decodePair2()
-print("decoded", decodedColumnPos)
-print("decoded", decodedRowPos)
+
+
 
 
 
