@@ -6,8 +6,6 @@ row = []
 encodedRowPos = []
 column = []
 encodedColumnPos = []
-decodedRowPos = []
-decodedColumnPos = []
 encodedText = ""
 
 
