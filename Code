@@ -11,6 +11,10 @@ decodedColumnPos = []
 encodedText = ""
 
 
+# TO DO
+# REMOVE GLOBAL VARIABLES
+# REMOVE DECODING SECTIONS
+
 
 def createMatrix():
   for e in array:
